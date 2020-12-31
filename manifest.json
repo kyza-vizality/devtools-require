@@ -1,0 +1,7 @@
+{
+	"name": "Devtools Require",
+	"description": "Allows you to use a mildly flawed `require` through the devtools with `vzr()`.",
+	"author": "Куzа",
+	"version": "1.0.0",
+	"license": "None"
+}
