@@ -7,15 +7,18 @@ module.exports = class DevtoolsRequire extends (
 		globalThis.vzr = (module = "") => {
 			module = module.trim();
 			// No module? Just return the core.
-			if (module.length === 0)
-				Object.assign(require(`@vizality`), globalThis.vizality);
+			if (module.length === 0) {
+				return this.antiDefault(
+					Object.assign(require(`@vizality`), globalThis.vizality)
+				);
+			}
 			try {
 				// Try to get the module.
-				return require(`@vizality/${module}`);
+				return this.antiDefault(require(`@vizality/${module}`));
 			} catch {
 				// If that doesn't exist, get one of the normally exposed submodules.
 				// As a last resort it might be a Node module.
-				return (
+				return this.antiDefault(
 					this.deepValue(
 						Object.assign(require(`@vizality`), globalThis.vizality),
 						module
@@ -34,5 +37,9 @@ module.exports = class DevtoolsRequire extends (
 			obj = obj[path[i]];
 		}
 		return obj;
+	}
+
+	antiDefault(obj) {
+		return obj.default ?? obj;
 	}
 };
