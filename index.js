@@ -1,4 +1,4 @@
-const { Plugin } = require("@vizality/entities");
+const { Plugin } = require("@vizality/core");
 
 module.exports = class DevtoolsRequire extends (
 	Plugin
