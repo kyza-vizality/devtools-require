@@ -26,6 +26,15 @@ module.exports = class DevtoolsRequire extends (
 				);
 			}
 		};
+		Object.defineProperty(globalThis.vzr, "cache", {
+			get() {
+				return require.cache;
+			},
+			set(value) {
+				require.cache = value;
+			},
+		});
+		globalThis.vzr.resolve = require.resolve;
 	}
 
 	onStop() {
